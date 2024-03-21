@@ -18,30 +18,22 @@
 class ProtectedObject:
 
     def __init__(self, **kwargs):
-        self.__dict__.update(kwargs)
+        for k, v in kwargs.items():
+            object.__setattr__(self, k, v)
 
     def __getattribute__(self, attr):
-        if hasattr(self, attr) and attr.startswith('_'):
+        if attr.startswith('_'):
             raise AttributeError('Доступ к защищенному атрибуту невозможен')
-        object.__getattribute__(self, attr)
+        return object.__getattribute__(self, attr)
 
     def __setattr__(self, k, v):
-        if hasattr(self, k) and k.startswith('_'):
+        if k.startswith('_'):
             raise AttributeError('Доступ к защищенному атрибуту невозможен')
         object.__setattr__(self, k, v)
 
     def __delattr__(self, k):
-        if hasattr(self, k) and k.startswith('_'):
+        if k.startswith('_'):
             raise AttributeError('Доступ к защищенному атрибуту невозможен')
         object.__delattr__(self, k)
 
 
-user = ProtectedObject(login='PG_kamiya', _password='alreadybanned')
-
-try:
-    print(user.login)
-    print(user.password)
-except AttributeError as e:
-    print(e)
-
-print(user.__dict__)
