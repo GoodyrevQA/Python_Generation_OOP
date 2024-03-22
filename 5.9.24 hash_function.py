@@ -57,3 +57,5 @@ def hash_function(obj):
     return ans
 
 print(hash_function([1, 2, 3, 'python']))
+
+# переделать
