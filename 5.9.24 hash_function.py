@@ -27,18 +27,15 @@ def hash_function(obj):
     obj = str(obj)
 
     def first(obj):
-        obj1 = obj
         h = 0
-        if len(obj1) % 2 == 1:
-            ind_to_del = len(obj1) // 2
-            char_to_del= obj1[ind_to_del]
-            h += ord(char_to_del)
-            obj1 = obj1.replace(char_to_del, '')
+        if len(obj) % 2 == 1:
+            mid = len(obj) // 2
+            h += ord(obj[mid])
 
         L = 0
-        R = len(obj1) - 1
+        R = len(obj) - 1
         while R > L:
-            h += ord(obj1[L]) * ord(obj1[R])
+            h += ord(obj[L]) * ord(obj[R])
             L += 1
             R -= 1
         return h
@@ -56,6 +53,14 @@ def hash_function(obj):
 
     return ans
 
+array = [8022, 530.602391530928, 'lycmfojREEBSKNcNoIjM', False, {'написать': False, 'собеседник': True},
+         (1448, True, -3913.85417440914, True),
+         [True, True, 554, 'FCLRrFheVhkrubirMUts', -33242154218.4859, 885507704053.121]]
+
+# for obj in array:
+#     print(hash_function(obj))
+
+
 print(hash_function([1, 2, 3, 'python']))
 
-# переделать
+
