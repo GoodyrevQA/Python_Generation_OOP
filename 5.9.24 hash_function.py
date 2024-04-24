@@ -53,14 +53,23 @@ def hash_function(obj):
 
     return ans
 
-array = [8022, 530.602391530928, 'lycmfojREEBSKNcNoIjM', False, {'написать': False, 'собеседник': True},
-         (1448, True, -3913.85417440914, True),
-         [True, True, 554, 'FCLRrFheVhkrubirMUts', -33242154218.4859, 885507704053.121]]
 
-# for obj in array:
-#     print(hash_function(obj))
+# region foreign solution
+class HashFunction:
+    def __call__(self, obj):
+        self.obj = str(obj)
+        return (self._e1(self.obj) * self._e2(self.obj)) % 123456791
+
+    @staticmethod
+    def _e1(obj):
+        l = len(obj)
+        return sum([ord(obj[i]) * ord(obj[-1 - i]) for i in range(l // 2)]) + (0, ord(obj[l // 2]))[l % 2]
+
+    @staticmethod
+    def _e2(obj):
+        return sum([ord(obj[i]) * (i+1, -i-1)[i % 2] for i in range(len(obj))])
 
 
-print(hash_function([1, 2, 3, 'python']))
-
+hash_function = HashFunction()
+# endregion
 
