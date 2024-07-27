@@ -17,6 +17,8 @@
 Другими словами, если исходные последовательности изменятся, то экземпляр класса SequenceZip измениться  не должен.
 '''
 
+from time import sleep
+
 class SequenceZip:
 
     def __init__(self, *args):
@@ -34,5 +36,6 @@ class SequenceZip:
 
 sequencezip = SequenceZip('ABC', ['bee', 'geek', 'python'], [1, 2, 3])
 
-print(list(sequencezip))
-print(tuple(sequencezip))
+# print(list(sequencezip))
+# print(tuple(sequencezip))
+# дописать

@@ -23,11 +23,17 @@ def limited_hash(left, right, hash_function=hash):
         dif = right - left + 1
         row_ans = hash_function(obj)
 
+        '''(hash(obj)-right-1)%(right-left+1)'''
+
         if row_ans > right:
-            shift = row_ans % right
-            if shift >= dif:
-                shift = shift % dif 
-            return left + shift 
+            shift = row_ans - right
+
+            while shift > dif:
+                shift -= dif
+
+            return left + shift - 1
+            
+
 
         elif row_ans < left:
             shift = left - row_ans 
@@ -53,3 +59,57 @@ array = [1366, -5502567186.7395, 'zZQyrjYzdgcabTZPATPl', False, {'монета':
 
 for item in array:
     print(hash_function(item))
+
+# def hash_function(obj):
+#     return sum(index * ord(character) for index, character in enumerate(str(obj), start=1))
+
+
+# hash_function = limited_hash(10, 15, hash_function)
+
+# array = [1366, -5502567186.7395, 'zZQyrjYzdgcabTZPATPl', False, {'монета': -671699723096.267, 'лететь': 5151},
+#          (False, True, 897, -844416.51017117, 1101),
+#          [True, 171664.794743347, True, False, 'UypAaBSjBWYWBYbmRTdN', 4044844490314.56]]
+
+# for item in array:
+#     print(hash_function(item))
+
+
+
+
+'''
+# TEST_1:
+10
+11
+15
+
+# TEST_2:
+10
+11
+15
+10
+11
+
+# TEST_3:
+15
+14
+10
+15
+14
+
+# TEST_4:
+3
+2
+3
+2
+3
+2
+3
+
+# TEST_5:
+13
+15
+14
+11
+12
+11
+14'''
