@@ -1,5 +1,5 @@
 # region description
-'''
+"""
 https://stepik.org/lesson/886253/step/24?unit=890908
 Реализуйте функцию hash_function(), которая принимает один аргумент:
 obj — произвольный объект
@@ -20,8 +20,9 @@ ord(obj[0]) * 1 - ord(obj[1]) * 2 + ord(obj[2]) * 3 - ord(obj[3]) * 4 + ...
 (temp1 * temp2) % 123456791
 где temp1 — значение, полученное в первом шаге, temp2 — значение, полученное во втором шаге
 и возвращать значение, полученное в третьем шаге.
-'''
+"""
 # endregion
+
 
 def hash_function(obj):
     obj = str(obj)
@@ -63,13 +64,15 @@ class HashFunction:
     @staticmethod
     def _e1(obj):
         l = len(obj)
-        return sum([ord(obj[i]) * ord(obj[-1 - i]) for i in range(l // 2)]) + (0, ord(obj[l // 2]))[l % 2]
+        return (
+            sum([ord(obj[i]) * ord(obj[-1 - i]) for i in range(l // 2)])
+            + (0, ord(obj[l // 2]))[l % 2]
+        )
 
     @staticmethod
     def _e2(obj):
-        return sum([ord(obj[i]) * (i+1, -i-1)[i % 2] for i in range(len(obj))])
+        return sum([ord(obj[i]) * (i + 1, -i - 1)[i % 2] for i in range(len(obj))])
 
 
 hash_function = HashFunction()
 # endregion
-

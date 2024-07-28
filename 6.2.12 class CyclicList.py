@@ -1,5 +1,5 @@
 # region description
-'''
+"""
 Реализуйте класс CyclicList, описывающий циклический список. При создании экземпляра класс должен принимать один аргумент:
 iterable — итерируемый объект, определяющий начальный набор элементов циклического списка.
 Если не передан, начальный набор элементов считается пустым
@@ -16,12 +16,13 @@ pop() — метод, который принимает в качестве ар
 
 Наконец, экземпляр класса CyclicList должен позволять получать значения своих элементов с помощью индексов,
 при этом индексы должны работать циклически. Например, в циклическом списке [1, 2, 3] элементом с индексом 4 должно являться число 2.
-'''
+"""
+
 # endregion
 from itertools import cycle
 
-class CyclicList:
 
+class CyclicList:
     def __init__(self, iterable=None):
         if iterable:
             self.it = list(iterable)
@@ -40,8 +41,8 @@ class CyclicList:
         if self.it:
             return list(self.it)[ind % len(self.it)]
         else:
-            raise IndexErrorError  
-    
+            raise IndexErrorError
+
     def append(self, obj):
         self.it.append(obj)
 
@@ -49,7 +50,7 @@ class CyclicList:
         el = self.__getitem__(indx)
         del self.it[indx]
         return el
-        
+
 
 # region foreign_solution
 
@@ -79,4 +80,3 @@ from itertools import cycle
 #         return self._data[index % len(self._data)]
 
 # endregion
-

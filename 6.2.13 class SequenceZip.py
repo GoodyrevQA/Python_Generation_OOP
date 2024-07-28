@@ -1,4 +1,4 @@
-'''
+"""
 Реализуйте класс SequenceZip.
 При создании экземпляра класс должен принимать произвольное количество позиционных аргументов,
 каждый из которых является последовательностью.
@@ -15,12 +15,12 @@
 
 Примечание 2. Экземпляр класса SequenceZip не должен зависеть от последовательностей, на основе которых он был создан.
 Другими словами, если исходные последовательности изменятся, то экземпляр класса SequenceZip измениться  не должен.
-'''
+"""
 
 from time import sleep
 
-class SequenceZip:
 
+class SequenceZip:
     def __init__(self, *args):
         self.args = args
         self.zp = list(zip(args))
@@ -34,7 +34,8 @@ class SequenceZip:
         if self.zp:
             return list(self.zp)[ind]
 
-sequencezip = SequenceZip('ABC', ['bee', 'geek', 'python'], [1, 2, 3])
+
+sequencezip = SequenceZip("ABC", ["bee", "geek", "python"], [1, 2, 3])
 
 # print(list(sequencezip))
 # print(tuple(sequencezip))

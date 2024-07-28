@@ -1,5 +1,5 @@
 # region description
-'''
+"""
 https://stepik.org/lesson/906773/step/9?unit=912312
 Требовалось реализовать класс Logger. При создании экземпляра класс не должен был принимать никаких аргументов.
 
@@ -10,15 +10,15 @@ https://stepik.org/lesson/906773/step/9?unit=912312
 
 Удаление атрибута <имя атрибута>
 Программист торопился и решил задачу неправильно. Дополните приведенный ниже код и реализуйте правильный класс Logger.
-'''
+"""
 # endregion
+
 
 class Logger:
     def __setattr__(self, name, value):
-        print(f'Изменение значения атрибута {name} на {value}')
+        print(f"Изменение значения атрибута {name} на {value}")
         object.__setattr__(self, name, value)
 
     def __delattr__(self, name):
-        print(f'Удаление атрибута {name}')
+        print(f"Удаление атрибута {name}")
         object.__delattr__(self, name)
-

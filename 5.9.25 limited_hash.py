@@ -1,5 +1,5 @@
 # region description
-'''
+"""
 Реализуйте функцию limited_hash(), которая принимает три аргумента в следующем порядке:
 left — целое число
 right — целое число
@@ -14,16 +14,14 @@ hash_function — хеш-функция, по умолчанию равняет�
 если right + 2 — в left + 1, если right + 3 — в left + 2, и так далее.
 Аналогичные преобразования, но в другую сторону, должны выполняться для хеш-значений, которые меньше left.
 Преобразования должны выполняться циклично при очередном выходе из диапазона.
-'''
+"""
 # endregion
 
-def limited_hash(left, right, hash_function=hash):
 
+def limited_hash(left, right, hash_function=hash):
     def new_function(obj):
         dif = right - left + 1
         row_ans = hash_function(obj)
-
-        '''(hash(obj)-right-1)%(right-left+1)'''
 
         if row_ans > right:
             shift = row_ans - right
@@ -32,13 +30,11 @@ def limited_hash(left, right, hash_function=hash):
                 shift -= dif
 
             return left + shift - 1
-            
-
 
         elif row_ans < left:
-            shift = left - row_ans 
+            shift = left - row_ans
             if shift > dif:
-                shift = shift % dif 
+                shift = shift % dif
             return right - shift + 1
 
         return row_ans
@@ -46,70 +42,24 @@ def limited_hash(left, right, hash_function=hash):
     return new_function
 
 
+# region foreign solutions
+def limited_hash(left, right, hash_function=hash):
+    def inner_hash_function(x):
+        return left + (hash_function(x) - left) % (right - left + 1)
 
-def hash_function(obj):
-    return sum(index * ord(character) for index, character in enumerate(str(obj), start=1))
-
-
-hash_function = limited_hash(10, 15, hash_function)
-
-array = [1366, -5502567186.7395, 'zZQyrjYzdgcabTZPATPl', False, {'монета': -671699723096.267, 'лететь': 5151},
-         (False, True, 897, -844416.51017117, 1101),
-         [True, 171664.794743347, True, False, 'UypAaBSjBWYWBYbmRTdN', 4044844490314.56]]
-
-for item in array:
-    print(hash_function(item))
-
-# def hash_function(obj):
-#     return sum(index * ord(character) for index, character in enumerate(str(obj), start=1))
+    return inner_hash_function
 
 
-# hash_function = limited_hash(10, 15, hash_function)
+def limited_hash(left, right, hash_function=hash):
+    def inner_hash_function(obj):
+        hash_value = hash_function(obj)
+        if hash_value < left:
+            hash_value = right - (left - hash_value - 1) % (right - left + 1)
+        elif hash_value > right:
+            hash_value = left + (hash_value - right - 1) % (right - left + 1)
+        return hash_value
 
-# array = [1366, -5502567186.7395, 'zZQyrjYzdgcabTZPATPl', False, {'монета': -671699723096.267, 'лететь': 5151},
-#          (False, True, 897, -844416.51017117, 1101),
-#          [True, 171664.794743347, True, False, 'UypAaBSjBWYWBYbmRTdN', 4044844490314.56]]
-
-# for item in array:
-#     print(hash_function(item))
+    return inner_hash_function
 
 
-
-
-'''
-# TEST_1:
-10
-11
-15
-
-# TEST_2:
-10
-11
-15
-10
-11
-
-# TEST_3:
-15
-14
-10
-15
-14
-
-# TEST_4:
-3
-2
-3
-2
-3
-2
-3
-
-# TEST_5:
-13
-15
-14
-11
-12
-11
-14'''
+# endregion

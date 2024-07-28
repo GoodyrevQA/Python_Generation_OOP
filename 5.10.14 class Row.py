@@ -1,5 +1,5 @@
 # region description
-'''
+"""
 Реализуйте класс Row, описывающий объект, содержащий произвольный набор атрибутов.
 При создании экземпляра класс должен принимать произвольное количество именованных аргументов
 и устанавливать их в качестве атрибутов создаваемому экземпляру.
@@ -24,33 +24,33 @@ Row(<имя 1-го атрибута>=<значение 1-го атрибута>,
 Наконец, при передаче экземпляра класса Row в функцию hash() должно возвращаться его хеш-значение.
 Алгоритм вычисления хеш-значения может быть произвольным, однако он должен учитывать все атрибуты экземпляра,
 их позиции, имена и соответствующие значения
-'''
+"""
 # endregion
 
-class Row:
 
+class Row:
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
 
     def __setattr__(self, k, v):
         if k in self.__dict__:
-            raise AttributeError('Изменение значения атрибута невозможно')
-        raise AttributeError('Установка нового атрибута невозможна')
+            raise AttributeError("Изменение значения атрибута невозможно")
+        raise AttributeError("Установка нового атрибута невозможна")
 
     def __delattr__(self, k):
         if k in self.__dict__:
-            raise AttributeError('Удаление атрибута невозможно')
+            raise AttributeError("Удаление атрибута невозможно")
         object.__delattr__(self, k)
-        
+
     def __repr__(self):
-        lst = [f'{k}={repr(v)}' for k, v in self.__dict__.items()]
-        s = ', '.join(lst)
-        return f'{__class__.__name__}({s})'
-    
+        lst = [f"{k}={repr(v)}" for k, v in self.__dict__.items()]
+        s = ", ".join(lst)
+        return f"{__class__.__name__}({s})"
+
     def __eq__(self, other):
         if isinstance(other, Row):
             return tuple(self.__dict__.items()) == tuple(other.__dict__.items())
         return NotImplemented
-    
+
     def __hash__(self):
         return hash(tuple(self.__dict__.items()))

@@ -1,5 +1,5 @@
 # region description
-'''
+"""
 Реализуйте класс Const.
 При создании экземпляра класс должен принимать произвольное количество именованных аргументов.
 Все передаваемые аргументы должны устанавливаться создаваемому экземпляру в качестве атрибутов.
@@ -11,21 +11,20 @@
 
 При попытке удалить атрибут должно возбуждаться исключение AttributeError с текстом:
 Удаление атрибута невозможно
-'''
+"""
 # endregion
 
-class Const:
 
+class Const:
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
 
     def __setattr__(self, k, v):
         if k in self.__dict__:
-            raise AttributeError('Изменение значения атрибута невозможно')
+            raise AttributeError("Изменение значения атрибута невозможно")
         object.__setattr__(self, k, v)
 
     def __delattr__(self, k):
         if k in self.__dict__:
-            raise AttributeError('Удаление атрибута невозможно')
+            raise AttributeError("Удаление атрибута невозможно")
         object.__delattr__(self, k)
-

@@ -1,5 +1,5 @@
 # region description
-'''
+"""
 https://stepik.org/lesson/805783/step/12?unit=808910
 Реализуйте класс RomanNumeral, описывающий число в римской системе счисления.
 При создании экземпляра класс должен принимать один аргумент:
@@ -18,57 +18,47 @@ number — число в римской системе счисления. На�
 
 результатом сложения должен являться новый экземпляр класса RomanNumeral, представляющий сумму исходных
 результатом вычитания должен являться новый экземпляр класса RomanNumeral, представляющий разность исходных
-'''
+"""
 # endregion
 
 from functools import total_ordering
 
+
 @total_ordering
 class RomanNumeral:
-
     @staticmethod
     def roman_to_int(s):
-        dct = {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,
-            "C": 100,
-            "D": 500,
-            "M": 1000
-        }
+        dct = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
 
         res = 0
 
         for i in range(len(s) - 1):
-            if dct[s[i]] >= dct[s[i+1]]:
+            if dct[s[i]] >= dct[s[i + 1]]:
                 res += dct[s[i]]
             else:
                 res -= dct[s[i]]
         res += dct[s[-1]]
         return res
 
-
     @staticmethod
     def int_to_roman(n):
-
         dct = {
-            1: 'I',
-            4: 'IV',
-            5: 'V',
-            9: 'IX',
-            10: 'X',
-            40: 'XL',
-            50: 'L',
-            90: 'XC',
-            100: 'C',
-            400: 'CD',
-            500: 'D',
-            900: 'CM',
-            1000: 'M'
+            1: "I",
+            4: "IV",
+            5: "V",
+            9: "IX",
+            10: "X",
+            40: "XL",
+            50: "L",
+            90: "XC",
+            100: "C",
+            400: "CD",
+            500: "D",
+            900: "CM",
+            1000: "M",
         }
 
-        res = ''
+        res = ""
 
         for arabic in list(dct)[::-1]:
             while n >= arabic:
@@ -76,7 +66,6 @@ class RomanNumeral:
                 n -= arabic
 
         return res
-
 
     def __init__(self, number):
         self.number = number
@@ -111,4 +100,3 @@ class RomanNumeral:
             roman_sub = RomanNumeral.int_to_roman(arabic_sub)
             return __class__(roman_sub)
         return NotImplemented
-
