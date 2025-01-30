@@ -21,17 +21,17 @@ class ProtectedObject:
         for k, v in kwargs.items():
             object.__setattr__(self, k, v)
 
-    def __getattribute__(self, attr):
+    def __getattribute__(self, attr: str):
         if attr.startswith("_"):
             raise AttributeError("Доступ к защищенному атрибуту невозможен")
         return object.__getattribute__(self, attr)
 
-    def __setattr__(self, k, v):
+    def __setattr__(self, k: str, v):
         if k.startswith("_"):
             raise AttributeError("Доступ к защищенному атрибуту невозможен")
         object.__setattr__(self, k, v)
 
-    def __delattr__(self, k):
+    def __delattr__(self, k: str):
         if k.startswith("_"):
             raise AttributeError("Доступ к защищенному атрибуту невозможен")
         object.__delattr__(self, k)
