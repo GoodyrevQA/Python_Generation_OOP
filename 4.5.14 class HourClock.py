@@ -31,8 +31,3 @@ class HourClock:
             raise ValueError('Некорректное время')
         
     hours = property(get_hours, set_hours)
-
-
-hc = HourClock(7)
-print(dir(hc))
-print(hc.__dict__)
